@@ -1,0 +1,94 @@
+#include "Romi_Motor_Power.h"
+#include "RSLK_Pins.h"
+#include "SimpleRSLK.h"  
+
+int RSpeed = 15;
+int LSpeed = 14;
+
+
+void setup() {
+setupRSLK();
+
+  pinMode(BP_SW_PIN_0,INPUT_PULLUP);
+  pinMode(BP_SW_PIN_1,INPUT_PULLUP);
+  pinMode(BP_SW_PIN_2,INPUT_PULLUP);
+  pinMode(BP_SW_PIN_3,INPUT_PULLUP);
+  pinMode(BP_SW_PIN_4,INPUT_PULLUP);
+  pinMode(BP_SW_PIN_5,INPUT_PULLUP);
+
+ 
+
+// setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_BACKWARD);
+// setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD);
+// setMotorDirection(BOTH_MOTORS, MOTOR_DIR_FORWARD):
+
+enableMotor(BOTH_MOTORS);
+
+
+}
+
+void loop() {
+setMotorDirection(BOTH_MOTORS, MOTOR_DIR_FORWARD);
+  setMotorSpeed(RIGHT_MOTOR, RSpeed);
+  setMotorSpeed(LEFT_MOTOR, LSpeed);
+  
+  bool pressed = false;
+  if(digitalRead(BP_SW_PIN_0) == 0){
+    pressed = true;
+}
+  if(digitalRead(BP_SW_PIN_1) == 0){
+    pressed = true;
+}
+  if(digitalRead(BP_SW_PIN_2) == 0){
+    pressed = true;
+}
+  if(digitalRead(BP_SW_PIN_3) == 0){
+    pressed = true;
+}
+  if(digitalRead(BP_SW_PIN_4) == 0){
+    pressed = true;
+}
+  if(digitalRead(BP_SW_PIN_5) == 0){
+    pressed = true;
+}
+
+if( pressed ){
+setMotorDirection(BOTH_MOTORS, MOTOR_DIR_BACKWARD);
+ delay(300);
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_BACKWARD); // left
+delay(750);
+
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD);
+delay(4200);
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_BACKWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD); // right
+delay(750);
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD);
+delay(1500);
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_BACKWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD); // right
+delay(750);
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD);
+delay(3900);
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_BACKWARD); // left
+delay(750);
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD);
+delay(1700);
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_BACKWARD); // left
+delay(750);
+setMotorDirection(RIGHT_MOTOR, MOTOR_DIR_FORWARD);
+setMotorDirection(LEFT_MOTOR, MOTOR_DIR_FORWARD);
+delay(5000);
+ setMotorSpeed(BOTH_MOTORS,0);
+  disableMotor(BOTH_MOTORS);
+ 
+
+  
+}}
